@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>StudyBot — Your AI Study Desk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<section id="authScreen" class="auth-screen">
+ <div class="auth-card">
+  <div class="brand auth-brand"><span class="brand-mark">S</span><span class="brand-name">StudyBot</span></div>
+  <p class="eyebrow">YOUR PERSONAL STUDY SPACE</p><h1 id="authTitle">Welcome back.</h1>
+  <p id="authSubtitle" class="muted auth-subtitle">Sign in to continue learning with StudyBot.</p>
+  <div class="auth-tabs"><button id="showLoginTab" class="auth-tab active" type="button">Login</button><button id="showRegisterTab" class="auth-tab" type="button">Create account</button></div>
+  <form id="loginForm" class="auth-form">
+   <label for="loginEmail">Email address</label><input id="loginEmail" type="email" autocomplete="email" placeholder="you@example.com" required>
+   <label for="loginPassword">Password</label><input id="loginPassword" type="password" autocomplete="current-password" placeholder="Your password" required>
+   <button id="loginBtn" class="btn-primary auth-submit">Sign in</button>
+  </form>
+  <form id="registerForm" class="auth-form hidden">
+   <label for="registerName">Your name</label><input id="registerName" type="text" maxlength="80" autocomplete="name" placeholder="Enter your name" required>
+   <label for="registerEmail">Email address</label><input id="registerEmail" type="email" autocomplete="email" placeholder="you@example.com" required>
+   <label for="registerPassword">Create password</label><input id="registerPassword" type="password" minlength="8" autocomplete="new-password" placeholder="At least 8 characters" required>
+   <small class="muted">Use at least 8 characters.</small><button id="registerBtn" class="btn-primary auth-submit">Create account</button>
+  </form>
+  <p id="authMessage" class="auth-message" role="status" aria-live="polite"></p>
+  <p class="auth-note">Your password is hashed on the server and is not stored as plain text.</p>
+ </div>
+</section>
+
+<div id="app" class="app hidden">
+ <aside class="rail">
+  <div class="brand"><span class="brand-mark">S</span><span class="brand-name">StudyBot</span></div>
+  <nav class="rail-nav">
+   <button class="rail-btn active" data-view="chat"><span class="rail-icon">💬</span> Chat</button>
+   <button class="rail-btn" data-view="notes"><span class="rail-icon">📝</span> Notes</button>
+   <button class="rail-btn" data-view="flashcards"><span class="rail-icon">🗂️</span> Flashcards</button>
+   <button class="rail-btn" data-view="quiz"><span class="rail-icon">🧠</span> Quiz</button>
+  </nav>
+  <div class="rail-footer">
+   <button id="newChatBtn" class="rail-mini-btn">＋ New chat</button><button id="exportBtn" class="rail-mini-btn">↓ Export chat</button>
+   <div class="account-box"><span id="accountAvatar" class="account-avatar">S</span><div class="account-details"><span id="accountName">Student</span><small id="accountEmail"></small></div></div>
+   <button id="logoutBtn" class="rail-mini-btn logout-btn">↪ Log out</button>
+  </div>
+ </aside>
+ <main class="content">
+  <section id="view-chat" class="view active">
+   <div id="chatWindow" class="chat-window"><div class="msg bot"><div class="bubble">Hi, I'm StudyBot. Ask me about your coursework, or use Notes, Flashcards, or Quiz.</div></div></div>
+   <div class="input-bar"><textarea id="userInput" placeholder="Type your message..." rows="1" aria-label="Your message"></textarea><button id="sendBtn" aria-label="Send">➤</button></div>
+  </section>
+  <section id="view-notes" class="view">
+   <header class="view-header"><h1>Notes generator</h1><p>Turn any topic into structured study notes.</p></header>
+   <div class="tool-bar"><input id="notesTopic" type="text" placeholder="e.g. Newton's Laws of Motion"><select id="notesStyle"><option value="short">Quick revision</option><option value="balanced" selected>Balanced</option><option value="detailed">Detailed</option></select><button id="notesBtn" class="btn-primary">Generate</button></div>
+   <div id="notesOutput" class="notes-output empty"><p class="placeholder">Your generated notes will appear here.</p></div><button id="downloadNotesBtn" class="btn-secondary hidden">↓ Download notes (.txt)</button>
+  </section>
+  <section id="view-flashcards" class="view">
+   <header class="view-header"><h1>Flashcards</h1><p>Click a card to flip it and test yourself.</p></header>
+   <div class="tool-bar"><input id="flashTopic" type="text" placeholder="e.g. Periodic Table Trends"><select id="flashCount"><option value="6">6 cards</option><option value="8" selected>8 cards</option><option value="12">12 cards</option></select><button id="flashBtn" class="btn-primary">Generate</button></div><div id="flashGrid" class="flash-grid"></div>
+  </section>
+  <section id="view-quiz" class="view">
+   <header class="view-header"><h1>Quiz</h1><p>Test your knowledge on any topic.</p></header>
+   <div class="tool-bar"><input id="quizTopic" type="text" placeholder="e.g. Photosynthesis"><select id="quizCount"><option value="3">3 Qs</option><option value="5" selected>5 Qs</option><option value="10">10 Qs</option></select><select id="quizDifficulty"><option value="easy">Easy</option><option value="medium" selected>Medium</option><option value="hard">Hard</option></select><button id="quizBtn" class="btn-primary">Generate</button></div>
+   <div id="quizBody" class="quiz-body"></div><div id="quizFooterBar" class="quiz-footer hidden"><button id="submitQuiz" class="btn-primary">Submit answers</button><div id="quizScore"></div></div>
+  </section>
+ </main>
+</div>
+<script src="script.js"></script>
+</body></html>
